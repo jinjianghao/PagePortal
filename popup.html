@@ -72,16 +72,149 @@
       border-color: #45a049;
       box-shadow: 0 0 5px rgba(76,175,80,0.3);
     }
+    .group-container {
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    
+    .group-title {
+      font-weight: bold;
+      color: #333;
+      display: flex;
+      align-items: center;
+    }
+
+    .group-title:before {
+      content: '▼';
+      margin-right: 8px;
+      transition: transform 0.3s;
+    }
+
+    .group-collapsed .group-title:before {
+      transform: rotate(-90deg);
+    }
+
+    .group-collapsed .group-content {
+      display: none;
+    }
+    
+    .group-content {
+      transition: all 0.3s ease;
+    }
+
+    .link-button {
+      cursor: move;
+    }
+
+    .drag-over {
+      border: 2px dashed #4CAF50;
+      background-color: rgba(76, 175, 80, 0.1);
+    }
+
+    .dragging {
+      opacity: 0.5;
+    }
+
+    .open-all-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    .open-all-btn:hover {
+      background-color: #45a049;
+    }
+
+    .context-menu {
+      position: fixed;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 5px 0;
+      min-width: 160px;
+      z-index: 1000;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.1s, transform 0.1s;
+    }
+
+    .context-menu.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .context-menu-item {
+      padding: 8px 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .context-menu-item:hover {
+      background-color: #f5f5f5;
+      padding-left: 20px;
+    }
+
+    .context-menu-item.danger {
+      color: #f44336;
+    }
+
+    .context-menu-item.danger:hover {
+      background-color: #fee;
+    }
+
+    .context-menu-item i {
+      margin-right: 8px;
+      font-size: 14px;
+      width: 16px;
+      text-align: center;
+    }
+
+    .context-menu-separator {
+      height: 1px;
+      background-color: #eee;
+      margin: 5px 0;
+    }
   </style>
 </head>
 <body>
   <input type="text" class="search-box" id="searchLinks" placeholder="搜索链接...">
+  <div id="groupsContainer"></div>
   
   <div id="renameDialog" style="display:none;">
     <div id="renameLabel"></div>
     <input type="text" id="renameInput" placeholder="输入新名称">
     <button id="renameConfirm">确认</button>
     <button id="renameCancel">取消</button>
+  </div>
+
+  <div id="contextMenu" class="context-menu" style="display: none;">
+    <div class="context-menu-item" data-action="new-group">
+      <i>➕</i> 新建分组
+    </div>
+    <div class="context-menu-separator"></div>
+    <div class="context-menu-item" data-action="edit">
+      <i>✏️</i> 编辑
+    </div>
+    <div class="context-menu-item danger" data-action="delete">
+      <i>🗑️</i> 删除
+    </div>
   </div>
 </body>
 </html>

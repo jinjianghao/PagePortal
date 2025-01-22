@@ -1,58 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Settings</title>
+  <meta charset="UTF-8">
+  <title>PagePortal 设置</title>
   <style>
-    .link-form {
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .link-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 5px;
+      border-radius: 4px;
+    }
+    .btn-delete {
+      background-color: #f44336;
+      padding: 5px 10px;
+    }
+    .groups-section {
       margin: 20px 0;
       padding: 15px;
       border: 1px solid #ddd;
       border-radius: 4px;
     }
     
-    .link-item {
+    .group-list {
+      margin: 10px 0;
+    }
+    
+    .group-item {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    
-    .form-group {
-      margin-bottom: 15px;
-    }
-    
-    .btn-primary {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
+      padding: 8px;
+      margin: 5px 0;
+      background: #f5f5f5;
       border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    
+    .group-item:hover {
+      background: #e8e8e8;
+    }
+    
+    .group-item span {
+      flex: 1;
+      padding: 4px 8px;
       cursor: pointer;
     }
+    
+    .group-item span:hover {
+      background-color: rgba(76, 175, 80, 0.1);
+      border-radius: 4px;
+    }
+    
+    .group-item .btn-delete {
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+    
+    .group-item:hover .btn-delete {
+      opacity: 1;
+    }
+    
+    .edit-group-input {
+      width: 200px;
+      padding: 4px 8px;
+      border: 1px solid #4CAF50;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .help-text {
+      display: block;
+      margin-top: 4px;
+      color: #666;
+      font-size: 12px;
+      font-style: italic;
+    }
   </style>
-  <script src="settings.js"></script>
 </head>
 <body>
-  <h1>配置链接和分组</h1>
-  
-  <div class="link-form">
+  <h2>管理分组</h2>
+  <div class="groups-section">
     <div class="form-group">
-      <input type="text" id="newLinkName" placeholder="链接名称" required>
+      <input type="text" id="newGroupInput" placeholder="输入新分组名称">
+      <small class="help-text">提示：双击分组名称可以编辑，点击删除按钮可以删除分组</small>
     </div>
-    <div class="form-group">
-      <input type="text" id="newLinkURL" placeholder="链接地址" required>
-    </div>
-    <div class="form-group">
-      <select id="linkGroup">
-        <option value="dev">开发环境</option>
-        <option value="tools">工具</option>
-        <option value="other">其他</option>
-      </select>
-    </div>
-    <button id="addLink" class="btn-primary">添加链接</button>
+    <button id="addGroup">添加分组</button>
+    <div id="groupList" class="group-list"></div>
   </div>
-  
+
+  <h2>添加新链接</h2>
+  <div class="form-group">
+    <input type="text" id="newLinkName" placeholder="链接名称">
+  </div>
+  <div class="form-group">
+    <input type="text" id="newLinkURL" placeholder="链接地址">
+  </div>
+  <div class="form-group">
+    <select id="groupSelect">
+      <option value="">选择分组</option>
+    </select>
+  </div>
+  <button id="addLink">添加链接</button>
+
+  <h2>已保存的链接</h2>
   <div id="linkList"></div>
-  <button id="saveSettings" class="btn-primary">保存设置</button>
+
+  <button id="saveSettings">保存设置</button>
+  <script src="settings.js"></script>
 </body>
 </html>
