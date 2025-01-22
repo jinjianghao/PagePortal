@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings</title>
+  <style>
+    .link-form {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .btn-primary {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="settings.js"></script>
+</head>
+<body>
+  <h1>配置链接和分组</h1>
+  
+  <div class="link-form">
+    <div class="form-group">
+      <input type="text" id="newLinkName" placeholder="链接名称" required>
+    </div>
+    <div class="form-group">
+      <input type="text" id="newLinkURL" placeholder="链接地址" required>
+    </div>
+    <div class="form-group">
+      <select id="linkGroup">
+        <option value="dev">开发环境</option>
+        <option value="tools">工具</option>
+        <option value="other">其他</option>
+      </select>
+    </div>
+    <button id="addLink" class="btn-primary">添加链接</button>
+  </div>
+  
+  <div id="linkList"></div>
+  <button id="saveSettings" class="btn-primary">保存设置</button>
+</body>
+</html>
